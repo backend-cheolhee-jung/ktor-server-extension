@@ -8,6 +8,7 @@ import Module.SERVER_PROTECTION
 plugins {
     kotlin(Plugins.JVM) version PluginVersions.JVM_VERSION
     id(Plugins.SHADOW_JAR) version PluginVersions.SHADOW_JAR_VERSION
+    id(Plugins.KTOR_PLUGIN) version PluginVersions.KTOR_PLUGIN_VERSION
 }
 
 dependencies {
@@ -18,6 +19,8 @@ dependencies {
     implementation(project(EXPOSED_SHEDLOCK))
     implementation(project(SERVER_PROTECTION))
 
+    testImplementation(Dependencies.KTOR_CLIENT_CIO)
+    testImplementation(Dependencies.KTOR_CLIENT_CONTENT_NEGOTIATION)
     testImplementation(Dependencies.REDISSON)
     testImplementation(Dependencies.LETTUCE_CORE)
     testImplementation(Dependencies.KOTLIN_COROUTINES)
