@@ -21,16 +21,14 @@ suspend fun <T> rateLimiter(
     val now = ZonedDateTime.now()
 
     mutex.withLock(RATE_LIMITER_PREFIX + key) {
-        if (rateLimiterMap hasNot key) rateLimiterMap[key] = RateLimiter(now, 1)
+        if (rateLimiterMap hasNot key) rateLimiterMap[key] = RateLimiter(now, 0)
 
-        val rateLimiter = rateLimiterMap.getValue(key)
+        val isExpired = now - rateLimiterMap.getValue(key).startUpTime > period.inWholeMilliseconds
+        if (isExpired) rateLimiterMap[key] = RateLimiter(now, 0)
 
-        val isExpired = now - rateLimiter.startUpTime > period.inWholeMilliseconds
-        if (isExpired) rateLimiterMap[key] = RateLimiter(now, 1)
+        rateLimiterMap[key] = rateLimiterMap.getValue(key).copy(count = rateLimiterMap.getValue(key).count + 1)
 
-        rateLimiterMap[key] = rateLimiter.copy(count = rateLimiter.count + 1)
-
-        if (rateLimiter.count > limit) throw RateLimitExceededException()
+        if (rateLimiterMap.getValue(key).count > limit) throw RateLimitExceededException()
     }
 
     block()
@@ -45,16 +43,14 @@ suspend fun <T> rateLimiter(
     val now = ZonedDateTime.now()
 
     mutex.withLock(RATE_LIMITER_PREFIX + key) {
-        if (rateLimiterMap hasNot key) rateLimiterMap[key] = RateLimiter(now, 1)
+        if (rateLimiterMap hasNot key) rateLimiterMap[key] = RateLimiter(now, 0)
 
-        val rateLimiter = rateLimiterMap.getValue(key)
+        val isExpired = now - rateLimiterMap.getValue(key).startUpTime > period.toMillis()
+        if (isExpired) rateLimiterMap[key] = RateLimiter(now, 0)
 
-        val isExpired = now - rateLimiter.startUpTime > period.toMillis()
-        if (isExpired) rateLimiterMap[key] = RateLimiter(now, 1)
+        rateLimiterMap[key] = rateLimiterMap.getValue(key).copy(count = rateLimiterMap.getValue(key).count + 1)
 
-        rateLimiterMap[key] = rateLimiter.copy(count = rateLimiter.count + 1)
-
-        if (rateLimiter.count > limit) throw RateLimitExceededException()
+        if (rateLimiterMap.getValue(key).count > limit) throw RateLimitExceededException()
     }
 
     block()
