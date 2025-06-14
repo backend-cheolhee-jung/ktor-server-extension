@@ -178,12 +178,23 @@ cacheable stores data in the cache and retrieves the value from the cache if it 
 If the cache is empty, the function executes, and the final value is stored in the cache.
 
 ```kotlin
+fun Database.findAll(): List<String> {
+    println("Fetching data from the database...")
+    return listOf("value1", "value2", "value3")
+}
+
+
 fun Application.module() {
     val values = cacheable("cacheable", 5.minutes) {
         Database.findAll()
     }
+    // console output: Fetching data from the database...
     
-    println(values)
+    
+    val values2 = cacheable("cacheable", 5.minutes) {
+        Database.findAll()
+    }
+    // console output: (no output, as the value is retrieved from the cache)
 }
 ```
 
