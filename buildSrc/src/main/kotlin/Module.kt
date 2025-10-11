@@ -6,5 +6,6 @@ object Module {
     const val SERVER_PROTECTION = ":server-protection"
     const val SCHEDULER = ":scheduler"
     const val EXPOSED_SHEDLOCK = ":exposed-shedlock"
+    const val ELASTIC_SEARCH = ":elastic-search"
     const val KTOR_EXTENSION_TEST = ":ktor-extension-test"
 }

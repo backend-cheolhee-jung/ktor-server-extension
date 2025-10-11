@@ -13,6 +13,8 @@ object DependencyVersions {
     const val LETTUCE_VERSION = "6.5.0.RELEASE"
     const val REDISSON_VERSION = "3.39.0"
 
+    const val ELASTICSEARCH_VERSION = "7.17.29"
+
     const val TEST_CONTAINERS_VERSION = "1.20.2"
     const val KOTEST_EXTENSIONS_VERSION = "2.0.2"
     const val TEST_MOCKK_VERSION = "4.0.2"
