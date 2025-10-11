@@ -10,6 +10,7 @@ repositories {
 }
 
 dependencies {
+    compileOnly(Dependencies.ELASTIC_SEARCH_CLIENT)
     compileOnly(Dependencies.ELASTIC_SEARCH_REST_HIGH_LEVEL_CLIENT)
     testImplementation(kotlin("test"))
 }

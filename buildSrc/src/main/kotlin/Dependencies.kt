@@ -21,7 +21,8 @@ object Dependencies {
     const val LETTUCE_CORE = "io.lettuce:lettuce-core:${DependencyVersions.LETTUCE_VERSION}"
     const val REDISSON = "org.redisson:redisson:${DependencyVersions.REDISSON_VERSION}"
 
-    const val ELASTIC_SEARCH_REST_HIGH_LEVEL_CLIENT = "org.elasticsearch.client:elasticsearch-rest-high-level-client:${DependencyVersions.ELASTICSEARCH_VERSION}"
+    const val ELASTIC_SEARCH_CLIENT = "co.elastic.clients:elasticsearch-java:${DependencyVersions.ELASTICSEARCH_CLIENT_VERSION}"
+    const val ELASTIC_SEARCH_REST_HIGH_LEVEL_CLIENT = "org.elasticsearch.client:elasticsearch-rest-high-level-client:${DependencyVersions.ELASTICSEARCH_HIGH_LEVEL_CLIENT_VERSION}"
 
     const val TEST_CONTAINERS_POSTGRESQL = "org.testcontainers:postgresql:${DependencyVersions.TEST_CONTAINERS_VERSION}"
     const val TEST_CONTAINERS_JDBC = "org.testcontainers:jdbc:${DependencyVersions.TEST_CONTAINERS_VERSION}"
