@@ -6,9 +6,11 @@ This is a simple extension for the Ktor framework that provides an easy way to u
 
 ## Dependencies
 
-It requires JDK version 17 or higher
+It requires JDK version 17 or higher.
 
-add the following to your build.gradle.kts file:
+The `exposed-shedlock` module requires **Exposed 1.0.0-beta-4 or higher** (Exposed 1.x).
+
+Add the following to your `build.gradle.kts`:
 
 ```kotlin
 repositories {
@@ -17,10 +19,20 @@ repositories {
 }
 
 dependencies {
-    implementation("com.github.lolmageap.ktor-server-extension:scheduler:1.0.5")
-    implementation("com.github.lolmageap.ktor-server-extension:exposed-shedlock:1.0.5")
-    implementation("com.github.lolmageap.ktor-server-extension:redis-shedlock:1.0.5")
-    implementation("com.github.lolmageap.ktor-server-extension:redis-cache:1.0.5")
+    implementation("com.github.lolmageap.ktor-server-extension:scheduler:1.0.6")
+    implementation("com.github.lolmageap.ktor-server-extension:exposed-shedlock:1.0.6")
+    implementation("com.github.lolmageap.ktor-server-extension:redis-shedlock:1.0.6")
+    implementation("com.github.lolmageap.ktor-server-extension:redis-cache:1.0.6")
+}
+```
+
+If you are using `exposed-shedlock`, make sure to include Exposed 1.x dependencies:
+
+```kotlin
+dependencies {
+    implementation("org.jetbrains.exposed:exposed-core:1.0.0-beta-4")
+    implementation("org.jetbrains.exposed:exposed-jdbc:1.0.0-beta-4")
+    implementation("org.jetbrains.exposed:exposed-java-time:1.0.0-beta-4")
 }
 ```
 
@@ -82,9 +94,13 @@ This extension offers an easy way to integrate ShedLock for managing distributed
 
 #### Configuration
 
-Before using ShedLock, you need to create the necessary schema:
+Before using ShedLock, you need to create the necessary schema.
+Note that `SchemaUtils` and `transaction` are now in `org.jetbrains.exposed.v1.jdbc` in Exposed 1.x:
 
 ```kotlin
+import org.jetbrains.exposed.v1.jdbc.SchemaUtils
+import org.jetbrains.exposed.v1.jdbc.transactions.transaction
+
 fun Application.module() {
     transaction { SchemaUtils.create(Shedlocks) }
 }
