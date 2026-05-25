@@ -1,4 +1,3 @@
-import Module.ELASTIC_SEARCH
 import Module.EXPOSED_SHEDLOCK
 import Module.HTTP_CLIENT
 import Module.REDIS_CACHE
@@ -18,7 +17,6 @@ dependencies {
     implementation(project(REDIS_CACHE))
     implementation(project(REDIS_SHEDLOCK))
     implementation(project(EXPOSED_SHEDLOCK))
-    implementation(project(ELASTIC_SEARCH))
     implementation(project(SERVER_PROTECTION))
 
     testImplementation(Dependencies.KTOR_CLIENT_CIO)
